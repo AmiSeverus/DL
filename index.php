@@ -7,8 +7,8 @@ if (DEBUG) {
     error_reporting(E_ALL);
 }
 
+$config = include 'config.php';
 include 'psql.php';
-include 'config.php';
 
 $psql = new psql();
 $psql->connect($config['local_psql']);
