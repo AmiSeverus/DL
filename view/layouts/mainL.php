@@ -81,9 +81,11 @@
 </head>
 <body>
     <div class='container'>
-        <h1 class='container_mainHeader'>
-            <center>Электронная библиотека</center>
-        </h1>
+        <a href='/dl/index.php'>
+            <h1 class='container_mainHeader'>
+                <center>Электронная библиотека</center>
+            </h1>
+        </a>
         <div class='container_content'>
             <div class='container_items'>
                 <h3 class='container_header'>
@@ -107,7 +109,7 @@
                     <center>Читатели</center>
                 </h3>
                 <div class='container_list'>
-                    <a href=#>Все читатели</a>
+                    <a href='/dl/index.php?controller=readers'>Все читатели</a>
                 </div>
                 <div class='container_itemSearch'>
                     <a href=#>Найти читателя</a>
