@@ -1,11 +1,11 @@
 <?php
-/*
+
 spl_autoload_register(function ($name){
-   $name = str_replace('\\', '/', ltrim($name, '\\'));
+   //$name = str_replace('\\', '/', ltrim($name, '\\'));
    
    include __DIR__ . DIRECTORY_SEPARATOR . $name . '.php';
    //echo __DIR__ . DIRECTORY_SEPARATOR . $name . '.php' . '<br/>';
-});*/
+});
 
 include 'request.php';
 
@@ -41,13 +41,11 @@ class core{
         };
         
         $controllerClass = new $controllerName;
-        
+
         if (!method_exists($controllerClass, $actionName)){
             throw new Exception('Action ' . $action . ' does not exist ');
         }
-        echo '<pre>';
-        print_r($controllerClass);
-        die($controllerName . '<<>>' . $actionName);    
+   
         $controllerClass->$actionName($message);
     }
 }

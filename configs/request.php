@@ -8,6 +8,7 @@ class request {
     
     public $controller;
     public $action;
+    public $id;
     public $get = [];
     public $post=[];
     
@@ -16,6 +17,7 @@ class request {
         $this->post = $_POST;
         $this->controller = $this->get['controller'] ?? 'main';
         $this->action = $this->get['action'] ?? 'index';
-        unset($this->get['controller'], $this->get['action']);
+        $this->id = $this->get['id'] ?? '';
+        unset($this->get['controller'], $this->get['action'], $this->get['id']);
     }
 };

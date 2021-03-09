@@ -123,7 +123,7 @@
             </center>
         </div>
         <div class='content'>
-            <?php echo $CONTENT = null; ?>
+            <?php echo $CONTENT ; ?>
         </div>
     </div>
 </body>
