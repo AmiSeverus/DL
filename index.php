@@ -7,10 +7,18 @@ if (DEBUG) {
     error_reporting(E_ALL);
 }
 
-$config = include 'config.php';
-include 'psql.php';
+
+$config = include __DIR__ . DIRECTORY_SEPARATOR . 'configs' . DIRECTORY_SEPARATOR . 'config.php'; 
+
+include './configs/core.php';
+
+$dl = new core($config);
+$dl->run();
+
+/*
+$config = include './configs/config.php';
+include './configs/psql.php';
 
 $psql = new psql();
-$psql->connect($config['local_psql']);
-print_r($psql);
+$psql->connect($config['local_psql']);*/
 
