@@ -9,8 +9,11 @@ class booksController extends controller {
         $model = $this->getModel(str_replace('Controller', '',__CLASS__) . 'M');
         $this->templateName = $this->getTemplate(__METHOD__);
         $books = $model->getBooks();
-        
-        echo $this->renderPage(['CONTENT' => $this->renderTemplate($books)]);
+        if ($books) {
+            echo $this->renderPage(['CONTENT' => $this->renderTemplate($books)]);
+        } else {
+            echo $this->renderPage(['CONTENT' => 'База данных пуста']);
+        }
     }
 }
 
