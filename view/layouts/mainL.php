@@ -11,10 +11,16 @@
     body {
         display:flex;
         position: relative;
-        align-items: center;
         justify-content: center;
     }
 
+    .container {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
     center {
         width: 100%;
     }
@@ -75,6 +81,22 @@
         position: relative;
         flex-direction:row;
         justify-content: space-evenly; 
+    }
+    
+    hr {
+        height: 0.5px;
+        background-color: black;
+        border: none;
+    }
+    
+    table {
+        margin: 0 auto;
+        border-spacing: 15px 10px;
+        font-size: 0.7em;
+    }
+    
+    th, td {
+        text-align: center;
     }
 </style>
 <title>Digital Library</title>
