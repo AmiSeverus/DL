@@ -76,7 +76,7 @@
     }
 
     .content{
-        margin-top: 50px;
+        margin-top: 15px;
         display: flex;
         position: relative;
         flex-direction:row;
