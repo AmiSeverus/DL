@@ -102,6 +102,7 @@
     form {
     display: flex;
     flex-direction: column;
+    margin-bottom: 5px;
     }
 
     input {
@@ -109,10 +110,13 @@
         border: 1px solid black;
         margin: 5px 0;
         min-height: 1.5em;
+        background-color: white;
+        
     }
 
     .btn {
         cursor: pointer;
+        background-color: inherit;
     }
 
     .btn:hover{
@@ -126,6 +130,11 @@
     .headerFind {
         margin: 0;
         margin-bottom: 5px;
+    }
+
+    .message {
+        text-align: center;
+        color: blue;
     }
 </style>
 <title>Digital Library</title>

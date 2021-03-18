@@ -17,7 +17,14 @@ class booksController extends controller {
     
     public function actionAdd(){
         $this->templateName = $this->getTemplate();
-        echo $this->renderPage(['CONTENT'=> $this->renderTemplate()]);
+        if (request::getInstance()->post){
+            /*echo '<pre>';
+            print_r(request::getInstance()->post);die();*/
+            $this->getModel()->addBook(request::getInstance()->post);
+            echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>'Книга добавлена'])]);
+        } else {
+            echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>''])]);            
+        }
     }
 }
 

@@ -6,7 +6,6 @@ class booksM extends model {
     }
     
     public function addBook($form){
-        return $this->db->query("insert into (title,author) books values (' . .',' . . ')");
+        $this->db->query("insert into books (title,author,availamount) values ({$this->db->escape($form['title'])} , {$this->db->escape($form['author'])} , {$this->db->escape($form['availamount'])})");
     }
-};
-
+}
