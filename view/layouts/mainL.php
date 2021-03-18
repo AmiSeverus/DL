@@ -98,6 +98,35 @@
     th, td {
         text-align: center;
     }
+    
+    form {
+    display: flex;
+    flex-direction: column;
+    }
+
+    input {
+        font-size: 0.7em;
+        border: 1px solid black;
+        margin: 5px 0;
+        min-height: 1.5em;
+    }
+
+    .btn {
+        cursor: pointer;
+    }
+
+    .btn:hover{
+        opacity: 0.5;
+    }
+
+    .btn:active{
+        font-weight: bold;
+    }
+
+    .headerFind {
+        margin: 0;
+        margin-bottom: 5px;
+    }
 </style>
 <title>Digital Library</title>
 </head>
@@ -114,16 +143,13 @@
                     <center>Книги</center>
                 </h3>
                 <div class='container_list'>
-                    <form method="GET"  >
-                        
-                    </form>
                     <a href='/dl/index.php?controller=books'>Все книги</a> 
                 </div>
                 <div class='container_itemSearch'>
                     <a href=#>Найти книгу</a>
                 </div>
                 <div class='container_itemAdd'>
-                    <a href=#>Добавить книгу</a>
+                    <a href='/dl/index.php?controller=books&action=add'>Добавить книгу</a>
                 </div>
             </div>
             <div class='container_items'>

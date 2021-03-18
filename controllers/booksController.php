@@ -5,15 +5,19 @@
 class booksController extends controller {
     
     public function actionIndex(){
-        
-        $model = $this->getModel(str_replace('Controller', '',__CLASS__) . 'M');
-        $this->templateName = $this->getTemplate(__METHOD__);
+        $model = $this->getModel();
+        $this->templateName = $this->getTemplate();
         $books = $model->getBooks();
         if ($books) {
             echo $this->renderPage(['CONTENT' => $this->renderTemplate($books)]);
         } else {
             echo $this->renderPage(['CONTENT' => 'База данных пуста']);
         }
+    }
+    
+    public function actionAdd(){
+        $this->templateName = $this->getTemplate();
+        echo $this->renderPage(['CONTENT'=> $this->renderTemplate()]);
     }
 }
 

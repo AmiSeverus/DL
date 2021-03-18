@@ -10,7 +10,7 @@ class request {
     public $action;
     public $id;
     public $get = [];
-    public $post=[];
+    public $post = [];
     
     private function __construct() {
         $this->get = $_GET;
@@ -20,4 +20,4 @@ class request {
         $this->id = $this->get['id'] ?? '';
         unset($this->get['controller'], $this->get['action'], $this->get['id']);
     }
-};
+}

@@ -6,24 +6,22 @@ class controller {
     
     protected $layoutName = 'mainL';
     protected $templateName = '';
-    
-    public function getLayout($class) {
-        return $this->layoutName = str_replace('Controller', '',$class) . 'L';
+    protected $modelName = '';
+       
+    public function getTemplate(){
+        return $this->templateName = request::getInstance()->controller . ucfirst(request::getInstance()->action) . 'T';       
     }
     
-    public function getTemplate($method){
-        return $this->templateName = str_replace('Controller::action', '', $method) . 'T';      
-    }
-    
-    public function getModel($modelName){
-        if (!isset($this->models[$modelName])){
-            if(!file_exists(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR . $modelName . '.php')){
-                throw new Exception('Model '. $modelName . 'does not exist');
+    public function getModel(){
+        $this->modelName = request::getInstance()->controller . 'M';
+        if (!isset($this->models[$this->modelName])){
+            if(!file_exists(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR . $this->modelName . '.php')){
+                throw new Exception('Model '. $this->modelName . 'does not exist');
             }
-            include __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR . $modelName . '.php';
-            $this->models[$modelName]= new $modelName;
+            include __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR . $this->modelName . '.php';
+            $this->models[$this->modelName]= new $this->modelName;
         }
-        return $this->models[$modelName];
+        return $this->models[$this->modelName];
     }
     
     protected function renderAll($dir, $template, $data = []) {
