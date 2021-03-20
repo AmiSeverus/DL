@@ -6,8 +6,7 @@ class errorController extends controller
 {
     
     public function actionIndex ($message){
-        echo $message . '<<>>';
-    }
-    
+        echo $this->renderPage(['CONTENT' => $message]);
+    }    
 }
 
