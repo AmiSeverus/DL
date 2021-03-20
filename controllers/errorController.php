@@ -4,7 +4,6 @@
 
 class errorController extends controller 
 {
-    
     public function actionIndex ($message){
         echo $this->renderPage(['CONTENT' => $message]);
     }    

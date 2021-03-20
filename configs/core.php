@@ -56,7 +56,7 @@ class core{
     public function test ($str){
         for ($i=0; $i < strlen($str); $i++){
             if (!($str[$i] >= 'A' && $str[$i]<= 'z')){
-                throw new Exception;
+                throw new Exception ('Что-то пошло не так');
             }
         }
     }

@@ -172,7 +172,7 @@
                     <a href=#>Найти читателя</a>
                 </div>
                 <div class='container_itemAdd'>
-                    <a href=#>Добавить читателя</a>
+                    <a href='/dl/index.php?controller=readers&action=add'>Добавить читателя</a>
                 </div>
             </div>
         </div>
