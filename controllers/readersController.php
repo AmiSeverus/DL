@@ -22,7 +22,7 @@ class readersController extends controller {
                 (
                     $reader['given_name'] == request::getInstance()->post['given_name'] &&
                     $reader['surname'] == request::getInstance()->post['surname'] &&
-                    $reader['active'] == false
+                    $reader['active'] == 'f'
                 ){
                     $this->getModel()->reactivateReader($reader['id']);
                     $key++;
@@ -32,7 +32,7 @@ class readersController extends controller {
                 (
                     $reader['given_name'] == request::getInstance()->post['given_name'] &&
                     $reader['surname'] == request::getInstance()->post['surname'] &&
-                    $reader['active'] == true                         
+                    $reader['active'] == 't'                         
                 ){
                     $key++;
                     echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>'Читатель уже существует'])]);
