@@ -16,4 +16,8 @@ class booksM extends model {
     public function deleteBook($id){
         $this->db->query("update books set active = false where id = {$this->db->escape($id)}");
     }
+    
+    public function reactivateBook($id){
+        $this->db->query("update books set active = true where id = {$this->db->escape($id)}");
+    }
 }

@@ -16,4 +16,8 @@ class readersM extends model {
     public function deleteReader($id){
         $this->db->query("update readers set active = false where id = {$this->db->escape($id)}");
     }
+    
+    public function reactivateReader($id){
+        $this->db->query("update readers set active = true where id = {$this->db->escape($id)}");
+    }
 }

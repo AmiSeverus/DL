@@ -13,10 +13,40 @@ class readersController extends controller {
     }
     
     public function actionAdd(){
+        $key = 1;
         $this->templateName = $this->getTemplate();
         if (request::getInstance()->post){
-            $this->getModel()->addReader(request::getInstance()->post);
-            echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>'Читатель добавлен'])]);
+            $readers = $this->getModel()->getReaders();
+            foreach ($readers as $reader){
+              if 
+                (
+                    //почему не попадаю в первое условие???
+                    $reader['given_name'] == request::getInstance()->post['given_name'] &&
+                    $reader['surname'] == request::getInstance()->post['surname'] &&
+                    $reader['active'] == false
+                ){
+                    $this->getModel()->reactivateReader($reader['id']);
+                    $key++;
+                    echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>'Читатель восстановлен'])]);
+                    break;
+                } else if 
+                (
+                    $reader['given_name'] == request::getInstance()->post['given_name'] &&
+                    $reader['surname'] == request::getInstance()->post['surname'] &&
+                    $reader['active'] == true                         
+                ){
+                    $key++;
+                    echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>'Читатель уже существует'])]);
+                    break;
+                } 
+            }
+            
+            if ($key == 1){
+                $this->getModel()->addReader(request::getInstance()->post);
+                echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>'Читатель добавлен'])]);                    
+            } else {
+                $key = 1;
+            }    
         } else {
             echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>''])]);            
         }
