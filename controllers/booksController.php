@@ -15,10 +15,39 @@ class booksController extends controller {
     }
     
     public function actionAdd(){
+        $key = 1;
         $this->templateName = $this->getTemplate();
         if (request::getInstance()->post){
-            $this->getModel()->addBook(request::getInstance()->post);
-            echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>'Книга добавлена'])]);
+            $books = $this->getModel()->getAllBooks();
+            foreach ($books as $book){
+              if 
+                (
+                    $book['title'] == request::getInstance()->post['title'] &&
+                    $book['author'] == request::getInstance()->post['author'] &&
+                    $book['active'] == 'f'
+                ){
+                    $this->getModel()->reactivateBook($book['id']);
+                    $key++;
+                    echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>'Книга восстановлена'])]);
+                    break;
+                } else if 
+                (
+                    $book['title'] == request::getInstance()->post['title'] &&
+                    $book['author'] == request::getInstance()->post['author'] &&
+                    $book['active'] == 't'                       
+                ){
+                    $key++;
+                    echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>'Книга уже существует'])]);
+                    break;
+                } 
+            }
+            
+            if ($key == 1){
+                $this->getModel()->addBook(request::getInstance()->post);
+                echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>'Книга добавлена'])]);
+            } else {
+                $key = 1;
+            }              
         } else {
             echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>''])]);            
         }
@@ -42,7 +71,7 @@ class booksController extends controller {
     }
     
     public function actionDelete(){
-        if (!request::getInstance()->get[id]){
+        if (!request::getInstance()->id){
             throw new Exception('Что-то пошло не так');
         }
         $this->getModel()->deleteBook(request::getInstance()->id);
