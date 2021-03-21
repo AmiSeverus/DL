@@ -105,7 +105,7 @@
     margin-bottom: 5px;
     }
 
-    input {
+    input, select {
         font-size: 0.7em;
         border: 1px solid black;
         margin: 5px 0;
@@ -155,7 +155,7 @@
                     <a href='/dl/index.php?controller=books'>Все книги</a> 
                 </div>
                 <div class='container_itemSearch'>
-                    <a href=#>Найти книгу</a>
+                    <a href='/dl/index.php?controller=books&action=find'>Найти книгу</a>
                 </div>
                 <div class='container_itemAdd'>
                     <a href='/dl/index.php?controller=books&action=add'>Добавить книгу</a>
@@ -169,7 +169,7 @@
                     <a href='/dl/index.php?controller=readers'>Все читатели</a>
                 </div>
                 <div class='container_itemSearch'>
-                    <a href=#>Найти читателя</a>
+                    <a href='/dl/index.php?controller=readers&action=find'>Найти читателя</a>
                 </div>
                 <div class='container_itemAdd'>
                     <a href='/dl/index.php?controller=readers&action=add'>Добавить читателя</a>

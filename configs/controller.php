@@ -7,6 +7,7 @@ class controller {
     protected $layoutName = 'mainL';
     protected $templateName = '';
     protected $modelName = '';
+    protected $content = '';
        
     public function getTemplate(){
         return $this->templateName = request::getInstance()->controller . ucfirst(request::getInstance()->action) . 'T';       
