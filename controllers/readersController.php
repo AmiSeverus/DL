@@ -16,11 +16,10 @@ class readersController extends controller {
         $key = 1;
         $this->templateName = $this->getTemplate();
         if (request::getInstance()->post){
-            $readers = $this->getModel()->getReaders();
+            $readers = $this->getModel()->getAllReaders();
             foreach ($readers as $reader){
               if 
                 (
-                    //почему не попадаю в первое условие???
                     $reader['given_name'] == request::getInstance()->post['given_name'] &&
                     $reader['surname'] == request::getInstance()->post['surname'] &&
                     $reader['active'] == false

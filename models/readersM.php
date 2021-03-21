@@ -1,6 +1,11 @@
 <?php
 
 class readersM extends model {
+    
+    public function getAllReaders(){
+        return $this->db->querySelect('select * from readers');        
+    }
+    
     public function getReaders(){
         return $this->db->querySelect('select * from readers where active = true');
     }
