@@ -28,8 +28,12 @@ class core{
     
     public function startAction($controller, $action, $message = ''){
         
-        $this->test ($controller);
-        $this->test ($action);
+        $this->testStr ($controller);
+        $this->testStr ($action);
+        
+        if (request::getInstance()->id){
+            $this->testNum(request::getInstance()->id);
+        }
         
         $controllerName = strtolower($controller).'Controller';
         $actionName = 'action' . ucfirst(strtolower($action));
@@ -53,11 +57,17 @@ class core{
         $controllerClass->$actionName($message);
     }
     
-    public function test ($str){
+    public function testStr ($str){
         for ($i=0; $i < strlen($str); $i++){
             if (!($str[$i] >= 'A' && $str[$i]<= 'z')){
                 throw new Exception ('Что-то пошло не так');
             }
+        }
+    }
+    
+    public function testNum($number){
+        if (!is_int(+$number) || +$number <= 0){
+            throw new Exception ('Что-то пошло не так');
         }
     }
 }
