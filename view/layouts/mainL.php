@@ -172,10 +172,20 @@
         border: none; 
         width: 100%; 
         cursor: pointer;
+        background-color: inherit;
     }
 
     .giveOutBtn:hover {
         color: blue;
+        background-color: inherit;
+    }
+    
+    button {
+        border: 1px solid black;
+        cursor: pointer;
+    }
+    button:hover {
+        font-weight: bolder;
     }
 </style>
 <title>Digital Library</title>
@@ -219,12 +229,12 @@
         </div>
         <div class='journal'>
             <center>
-                <a href="/dl/index.php?controller=journal">Выдать книгу читателю</a>
+                <a href="/dl/index.php?controller=journal&action=giveout">Выдать книгу читателю</a>
             </center>
         </div>
         <div class='journal'>
             <center>
-                <a href="#">Показать журнал выдачи</a>
+                <a href="/dl/index.php?controller=journal">Показать журнал выдачи</a>
             </center>
         </div>        
         <div class='content'>

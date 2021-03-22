@@ -5,32 +5,34 @@
                 <center>
                     <h4>Выбрать книгу</h4>
                 </center>
-                <form class='books' name='books' method="POST" action="#">
+                <form class='books' name='books' method="POST" action="/dl/index.php?controller=journal&action=giveout">
                     <select required name='searchField'>
                         <option>По названию</option>
                         <option>По автору</option>
                     </select>
                     <input required type="text" name='searchValue' placeholder="Заполните поле"></input>
-                    <input class="btn" type="submit" name="submit" value="Найти">
+                    <button class="btn" type="submit" name="books">Найти</button>
                     <input class="btn" type="reset" name="reset" value="Сбросить">
                     </form>
             </div>
             <hr style="width: 90%;">
             <div class="booksView">
                 <table style="width: 100%; border-spacing: 5px;">
+                    <?php foreach ($bookList as item) { ?>
                     <tr>
                         <th style="text-align: left; width: 25%;">Название</th>
-                        <td style="text-align: left;">1</td>
+                        <td style="text-align: left;"><?php echo $item['title']; ?></td>
                     </tr>
                     <tr>
                         <th style="text-align: left; width: 25%;">Автор</th>
-                        <td style="text-align: left;">2</td>
+                        <td style="text-align: left;"><?php echo $item['author']; ?></td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <form><button type='submit' name='1' formmethod="POST" formaction="#">Выбрать</button></form>
+                            <form><button type='submit' name= "<?php echo 'bookid=' .$item['id'] ; ?>" formmethod="POST" formaction="/dl/index.php?controller=journal&action=giveout">Выбрать</button></form>
                         </td>
                     </tr>
+                    <?php }?>
                 </table>
             </div>
         </div>
@@ -39,13 +41,13 @@
                 <center>
                     <h4>Выбрать читателя</h4>
                 </center>
-                <form class='readers' name='readers' method="POST" action="#">
+                <form class='readers' name='readers' method="POST" action="/dl/index.php?controller=journal&action=giveout">
                     <select required name='searchField'>
                         <option>По имени</option>
                         <option>По фамилии</option>
                     </select>
                     <input required type="text" name='searchValue' placeholder="Заполните поле"></input>
-                    <input class="btn" type="submit" name="submit" value="Найти">
+                    <button class="btn" type="submit" name="readers">Найти</button>
                     <input class="btn" type="reset" name="reset" value="Сбросить">
                 </form>
             </div>
@@ -62,7 +64,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <form><button type='submit' name='1' formmethod="POST" formaction="#">Выбрать</button></form>
+                            <form><button type='submit' name='readerid=3' formmethod="POST" formaction="/dl/index.php?controller=journal&action=giveout">Выбрать</button></form>
                         </td>
                     </tr>
                 </table>
@@ -71,7 +73,7 @@
     </div>                
     <div class='giveOut'>
         <hr>
-        <form class="giveOut" method="POST" action="#">
+        <form class="giveOut" method="POST" action="/dl/index.php?controller=journal&action=giveout">
             <input type="hidden" name="book_id" value='#'>
             <input type="hidden" name="reader_id" value='#'>
             <table style="width: 100%;">
