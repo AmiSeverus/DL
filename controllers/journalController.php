@@ -1,8 +1,15 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+class journalController extends controller {
+    
+    public function actionIndex(){
+        $this->templateName = $this->getTemplate();
+        //$books = $this->getModel()->getBooks();
+        //if ($books) {
+        echo $this->renderPage(['CONTENT' => $this->renderTemplate()]);
+        /*} else {
+            echo $this->renderPage(['CONTENT' => 'База данных пуста']);
+        }*/
+    }    
+}
 

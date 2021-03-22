@@ -1,5 +1,5 @@
 <div>
-    <h3>Найти читателя</h3>
+    <h3>Найти книгу</h3>
     <form name='search'action='/dl/index.php?controller=books&action=find' method="POST">
         <select required name='searchField'>
             <option>По названию</option>

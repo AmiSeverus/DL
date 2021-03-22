@@ -136,6 +136,47 @@
         text-align: center;
         color: blue;
     }
+    
+    .dl {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: center;
+    width: 100%;
+    }
+
+    .searchitems {
+        display: flex;
+        position: relative;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .booksSearch, .booksView, .readersSearch, .readersView {
+        margin: 10px;
+    }   
+
+    .books, .readers {
+        width: 100%;
+    }
+
+    .giveOut table {
+        border-spacing: 0;
+    }
+
+    .giveOut td, .giveOut th {
+        border: 1px solid black;
+    }
+
+    .giveOutBtn {
+        border: none; 
+        width: 100%; 
+        cursor: pointer;
+    }
+
+    .giveOutBtn:hover {
+        color: blue;
+    }
 </style>
 <title>Digital Library</title>
 </head>
@@ -178,9 +219,14 @@
         </div>
         <div class='journal'>
             <center>
-                <a href="#">Показать журнал выдачи</a>
+                <a href="/dl/index.php?controller=journal">Выдать книгу читателю</a>
             </center>
         </div>
+        <div class='journal'>
+            <center>
+                <a href="#">Показать журнал выдачи</a>
+            </center>
+        </div>        
         <div class='content'>
             <?php echo $CONTENT ; ?>
         </div>

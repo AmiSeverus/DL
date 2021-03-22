@@ -13,8 +13,12 @@ class controller {
         return $this->templateName = request::getInstance()->controller . ucfirst(request::getInstance()->action) . 'T';       
     }
     
-    public function getModel(){
-        $this->modelName = request::getInstance()->controller . 'M';
+    public function getModel($name=''){
+        if (!$name){
+            $this->modelName = request::getInstance()->controller . 'M';
+        } else {
+            $this->modelName = strtolower($name) . 'M';
+        }
         if (!isset($this->models[$this->modelName])){
             if(!file_exists(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR . $this->modelName . '.php')){
                 throw new Exception('Model '. $this->modelName . 'does not exist');
