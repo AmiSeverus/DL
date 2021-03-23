@@ -35,7 +35,31 @@ class journalController extends controller {
     }
     
     public function actionGiveout(){
-        print_r($_GET);
+        if (!request::getInstance()->post){
+            if (!array_key_exists('bookid', request::getInstance()->get) || !array_key_exists('bookid', request::getInstance()->get)){
+                throw new Exception();
+            } 
+            if (!request::getInstance()->get['bookid'] > 0 || !request::getInstance()->get['readerid']) {
+                throw new Exception;
+            }
+            if ($this->testArray($this->getModel()->getAvailBooks(), request::getInstance()->get['bookid']) && $this->testArray($this->getModel('readers')->getReaders(), request::getInstance()->get['readerid'])){
+        
+                $book = $this->getItem($this->getModel()->getAvailBooks(), request::getInstance()->get['bookid']);
+                $reader = $this->getItem($this->getModel('readers')->getReaders(), request::getInstance()->get['readerid']);
+                $this->templateName = $this->getTemplate();
+                echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['book'=>$book, 'reader'=>$reader])]);       
+            } else {throw new Exception;}
+        } else {
+            if (!array_key_exists('bookid', request::getInstance()->post) || !array_key_exists('bookid', request::getInstance()->post)){
+                throw new Exception;
+            }
+            if (!request::getInstance()->post['bookid'] > 0 || !request::getInstance()->post['readerid'] > 0){
+                throw new Exception;
+            }
+            $this->getModel()->giveOut(+request::getInstance()->post['bookid'], +request::getInstance()->post['readerid']);
+            $amount = $this->getModel()->getBookAmount(+request::getInstance()->post['bookid'])[0]['availamount'];
+            $this->getModel()->setBookAmount(+request::getInstance()->post['bookid'], $amount-1);
+            echo $this->renderPage(['CONTENT'=> 'Книга выдана']);      
+        }
     }
 }
-

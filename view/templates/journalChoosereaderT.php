@@ -8,7 +8,7 @@
                 <option>По имени</option>
                 <option>По фамилии</option>
             </select>
-            <input required type="text" name='searchValue' placeholder="Заполните поле"></input>
+            <input required type="text" name='searchValue' placeholder="Заполните поле">
             <input class="btn" type="submit" name="readers" value="Найти">
             <input class="btn" type="reset" name="reset" value="Сбросить">
         </form>

@@ -3,11 +3,11 @@
 class booksM extends model {
     
     public function getAllBooks(){
-        return $this->db->querySelect('select * from books');        
+        return $this->db->querySelect('select * from books order by id');        
     }
     
     public function getBooks(){
-        return $this->db->querySelect('select * from books where active = true');
+        return $this->db->querySelect('select * from books where active = true order by id');
     }
     
     public function addBook($form){

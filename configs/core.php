@@ -35,12 +35,20 @@ class core{
             $this->testNum(request::getInstance()->id);
         }
         
-        if (request::getInstance()->bookid){
-            $this->testNum(request::getInstance()->bookid+1);
+        if (array_key_exists('bookid', request::getInstance()->get)){
+            $this->testNum(request::getInstance()->get['bookid']+1);
         }
         
-        if (request::getInstance()->readerid){
-            $this->testNum(request::getInstance()->readerid+1);
+        if (array_key_exists('readerid', request::getInstance()->get)){
+            $this->testNum(request::getInstance()->get['readerid']+1);
+        }
+        
+        if (array_key_exists('bookid', request::getInstance()->post)){
+            $this->testNum(request::getInstance()->post['bookid']+1);
+        }
+        
+        if (array_key_exists('readerid', request::getInstance()->post)){
+            $this->testNum(request::getInstance()->post['readerid']+1);
         }
         
         $controllerName = strtolower($controller).'Controller';
@@ -68,14 +76,14 @@ class core{
     public function testStr ($str){
         for ($i=0; $i < strlen($str); $i++){
             if (!($str[$i] >= 'A' && $str[$i]<= 'z')){
-                throw new Exception ('Что-то пошло не так');
+                throw new Exception ();
             }
         }
     }
     
     public function testNum($number){
         if (!is_int(+$number) || +$number <= 0){
-            throw new Exception ('Что-то пошло не так');
+            throw new Exception ();
         }
     }
 }

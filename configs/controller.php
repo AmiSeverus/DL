@@ -47,6 +47,20 @@ class controller {
     public function renderTemplate ($data = []){
         return $this->renderAll('templates', $this->templateName, $data);
     }
-
+    
+    public function testArray ($array, $key){
+        foreach ($array as $item) {
+            $idList[] =$item['id']; 
+        }
+        return in_array($key,$idList);
+    }
+    
+    public function getItem ($array, $key){
+        foreach ($array as $item) {
+            if ($item['id'] == $key){
+                return $item;
+            }
+        }
+    }
 }
 
