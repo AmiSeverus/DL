@@ -35,6 +35,14 @@ class core{
             $this->testNum(request::getInstance()->id);
         }
         
+        if (request::getInstance()->bookid){
+            $this->testNum(request::getInstance()->bookid+1);
+        }
+        
+        if (request::getInstance()->readerid){
+            $this->testNum(request::getInstance()->readerid+1);
+        }
+        
         $controllerName = strtolower($controller).'Controller';
         $actionName = 'action' . ucfirst(strtolower($action));
         

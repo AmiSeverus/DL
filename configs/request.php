@@ -11,6 +11,8 @@ class request {
     public $id;
     public $get = [];
     public $post = [];
+    public $bookid = 0;
+    public $readerid = 0;
     
     private function __construct() {
         $this->get = $_GET;

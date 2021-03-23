@@ -229,7 +229,7 @@
         </div>
         <div class='journal'>
             <center>
-                <a href="/dl/index.php?controller=journal&action=giveout">Выдать книгу читателю</a>
+                <a href="/dl/index.php?controller=journal&action=choosebook">Выдать книгу читателю</a>
             </center>
         </div>
         <div class='journal'>
