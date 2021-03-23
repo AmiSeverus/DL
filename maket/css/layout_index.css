@@ -164,3 +164,23 @@ input {
 .giveOutBtn:hover {
     color: blue;
 }
+
+.journal {
+    border-spacing: 0;
+    border: none;
+}
+
+.journal tr, .journal th, .journal td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.journal input {
+    border: none; 
+    width: 100%; 
+    cursor: pointer;
+}
+
+.journal input:hover {
+    color: blue;
+}
