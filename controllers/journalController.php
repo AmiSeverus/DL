@@ -62,4 +62,29 @@ class journalController extends controller {
             echo $this->renderPage(['CONTENT'=> 'Книга выдана']);      
         }
     }
+    
+    public function actionIndex(){
+        $data = $this->getModel()->getRecords();
+        foreach ($data as $item) {
+            if (!empty($item['return_date_actual'])){
+                $item['form'] = '';
+            }  else {
+                $this->templateName='form';
+                $form = $this->renderTemplate(['data'=>['id'=>$item['id'], 'bookid'=>$item['book_id']]]);
+                $item['form'] = "$form";
+            }          
+            $res[]=$item;
+        }
+        $data = $res;
+        $this->templateName = $this->getTemplate();
+        echo $this->renderPage(['CONTENT'=>$this->renderTemplate(['data'=>$data])]);
+    }
+    
+    public function actionReturn(){
+        $dateStamp = date('Y-m-d');
+        $this->getModel()->setDataStamp($dateStamp, +request::getInstance()->post['recordid']);
+        $amount = $this->getModel()->getBookAmount(+request::getInstance()->post['bookid'])[0]['availamount'];
+        $this->getModel()->setBookAmount(+request::getInstance()->post['bookid'], $amount+1);
+        echo $this->renderPage(['CONTENT'=> 'Книга возвращена']);
+    }
 }

@@ -187,6 +187,28 @@
     button:hover {
         font-weight: bolder;
     }
+    
+    .journal {
+        border-spacing: 0;
+        border: none;
+    }
+
+    .journal tr, .journal th, .journal td {
+        border: 1px solid black;
+        padding: 5px;
+    }
+
+    .journal input {
+        border: none; 
+        width: 100%; 
+        cursor: pointer;
+        background-color: inherit;
+    }
+
+    .journal input:hover {
+        color: blue;
+    }
+    
 </style>
 <title>Digital Library</title>
 </head>
