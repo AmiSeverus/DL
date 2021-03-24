@@ -57,14 +57,5 @@ class controller {
             }
         }
     }
-    
-    /*
-    public function getItem ($array, $key){
-        foreach ($array as $item) {
-            if ($item['id'] == $key){
-                return $item;
-            }
-        }
-    }*/
 }
 

@@ -1,4 +1,5 @@
-<center><h3 class="headerFind">Все читатели</h3></center>
+<div>
+    <center><h3 class="headerFind">Все читатели</h3></center>
 <table>
     <tr>
         <th>ID</th>
@@ -22,4 +23,6 @@
     </tr>
     <?php }?>
 </table>
+</div>
+
 

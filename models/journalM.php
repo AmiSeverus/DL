@@ -34,10 +34,9 @@ class journalM extends model {
     
     public function getRecordsBySomeId($some,$id){
         return $this->db->querySelect('select 
-                                            t1.id, 
-                                            t1.reader_id,  
-                                            t1.book_id, 
-                                            t1.return_date_actual 
+                                            t1.*,
+                                            t2.*,
+                                            t3.*
                                         from journal t1
                                         left join books t2
                                         on t1.book_id = t2.id

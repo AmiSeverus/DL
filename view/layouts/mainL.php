@@ -252,6 +252,17 @@
         color: blue;
     }
     
+    .btnReturn {
+        border: none;
+        width: 100%;
+        cursor: pointer;
+        background-color: inherit;
+    }
+    
+    .btnReturn:hover{
+        color: blue;
+    }
+    
 </style>
 <title>Digital Library</title>
 </head>

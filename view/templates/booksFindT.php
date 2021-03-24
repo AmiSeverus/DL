@@ -5,7 +5,7 @@
             <option>По названию</option>
             <option>По автору</option>
         </select>
-        <input required type="text" name='searchValue' placeholder="Заполните поле"></input>
+        <input autocomplete="off" required type="text" name='searchValue' placeholder="Заполните поле"></input>
         <input class="btn" type="submit" name="submit" value="Отправить">
         <input class="btn" type="reset" name="reset" value="Сбросить">
     </form>

@@ -52,7 +52,6 @@ class journalController extends controller {
             
             $this->templateName = $this->getTemplate();
             $this->content = $this->renderTemplate(['book'=>$book, 'reader'=>$reader]);       
-            //echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['book'=>$book, 'reader'=>$reader])]); 
         } else {
             if (!array_key_exists('bookid', request::getInstance()->post) || !array_key_exists('readerid', request::getInstance()->post)){
                 throw new Exception;

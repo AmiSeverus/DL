@@ -10,6 +10,10 @@ class booksM extends model {
         return $this->db->querySelect('select * from books where active = true order by id');
     }
     
+    public function getBookByAttr($attr, $val){
+        return $this->db->querySelect('select * from books where active = true and ' . "{$this->db->escape($attr)}" .'= ' . "{$this->db->escape($val)}");
+    }
+    
     public function addBook($form){
         $this->db->query("insert into books (title,author,availamount) values ('{$this->db->escape($form['title'])}' , '{$this->db->escape($form['author'])}' , {$this->db->escape($form['availamount'])})");
     }

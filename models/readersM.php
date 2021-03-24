@@ -10,6 +10,10 @@ class readersM extends model {
         return $this->db->querySelect('select * from readers where active = true');
     }
     
+    public function getReaderByAttr($attr, $val){
+        return $this->db->querySelect('select * from readers where active = true and ' . "{$this->db->escape($attr)}" .'= ' . "{$this->db->escape($val)}");
+    }
+    
     public function addReader($form){
         $this->db->query("insert into readers (given_name,surname) values ('{$this->db->escape($form['given_name'])}' , '{$this->db->escape($form['surname'])}')");
     }

@@ -102,8 +102,43 @@ class booksController extends controller {
     }
     
     public function actionItem(){
+        
+        if (empty(request::getInstance()->id) || request::getInstance()->id <=0){
+            throw new Exception;
+        }
+        $book = $this->getModel()->getBookByAttr('id',request::getInstance()->id)[0];
+        $records = $this->getModel('journal')->getRecordsBySomeId(substr(request::getInstance()->controller, 0,-1),request::getInstance()->id);
+        
+        if (empty($records)){
+            $records[] = [
+                            'id' => '',
+                            'reader_id' => '',
+                            'book_id' => '',
+                            'given_name'=> '',
+                            'surname'=>'',
+                            'given_date' => '',
+                            'return_date' => '',
+                            'return_date_actual' => '',
+                            'form'=>''
+                        ];
+        } else {
+            foreach ($records as $item) {
+                if (!empty($item['return_date_actual'])){
+                    $item['form'] = '';
+                }  else {
+                    $this->templateName='form';
+                    $form = $this->renderTemplate(['data'=>['id'=>$item['id'], 'bookid'=>$item['book_id']]]);
+                    $item['form'] = "$form";
+                }          
+                $res[]=$item;
+            }
+        $records = $res;            
+        }
+        
+        
+        
         $this->templateName = $this->getTemplate();
-        echo $this->renderPage(['CONTENT'=> $this->renderTemplate()]);
+        echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['book'=>$book, 'records'=>$records])]);
     }
 }
 
