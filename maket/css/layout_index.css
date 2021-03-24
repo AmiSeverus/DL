@@ -184,3 +184,22 @@ input {
 .journal input:hover {
     color: blue;
 }
+
+.item table {
+    border-spacing: 0;
+}
+
+.item tr, .item th, .item td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.item input .btn {
+    border: none; 
+    width: 100%; 
+    cursor: pointer;
+}
+
+.item input .btn:hover {
+    color: blue;
+}
