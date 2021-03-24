@@ -46,45 +46,122 @@
             </center>
         </div>
         <div class='content'>
-            <table class='journal'>
-                <tr>
-                    <th>ID</th>
-                    <th colspan="3">Книга - Читатель</th>
-                    <th>Дата выдачи</th>
-                    <th>Вернуть до</th>
-                    <th>Дата возврата</th>
-                    <th>Вернуть</th>
-                </tr>
-                <tr>
-                    <td rowspan="4">1</td>
-                    <th rowspan="2">Книга</th>
-                    <th>Название</th>
-                    <td>Some title</td>
-                    <td rowspan="4">19/12/2020</td>
-                    <td rowspan="4">29/12/2020</td>
-                    <td rowspan="4">28/12/2020</td>
-                    <td rowspan="4">
-                        <form>
-                            <input type="hidden" name="recordid" value=''>
-                            <input type="hidden" name='bookid' value=''>
-                            <input type="button" value="Вернуть">
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Автор</th>
-                    <td>Some author</td>
-                </tr>
-                <tr>
-                    <th rowspan="2">Читатель</th>
-                    <th>Имя</th>
-                    <td>Some given_name</td>                    
-                </tr>
-                <tr>
-                    <th>Фамилия</th>
-                    <td>Some surname</td>
-                </tr>                    
-            </table>
+            <div class=item>
+                <center><h3>Книга</h3></center>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Название</th>
+                        <th>Автор</th>
+                        <th>На складе</th>
+                    </tr>
+                    <tr>
+                        <td>Some ID</td>
+                        <td>
+                            Some title
+                            <form action="#" method="POST">
+                                <input type="hidden" name="recordid" value="recordid">
+                                <input type="text" name="text" placeholder="Введите новое название">
+                                <input class="btn" type="submit" name="submit" value="Изменить">
+                                <input class="btn" type="reset" name="reset" value="Сбросить">
+                            </form>
+                        </td>
+                        <td>
+                            Some author
+                            <form action="#" method="POST">
+                                <input type="hidden" name="recordid" value="recordid">
+                                <input type="text" name="text" placeholder="Введите нового автора">
+                                <input class="btn" type="submit" name="submit" value="Изменить">
+                                <input class="btn" type="reset" name="reset" value="Сбросить">
+                            </form>
+                        </td>
+                        <td>
+                            Some amount
+                            <form action="#" method="POST">
+                                <input type="hidden" name="recordid" value="recordid">
+                                <input type="text" name="text" placeholder="Введите новое количество">
+                                <input class="btn" type="submit" name="submit" value="Изменить">
+                                <input class="btn" type="reset" name="reset" value="Сбросить">
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+                <center><h3>На руках у</h3></center>
+                <table>
+                    <tr>
+                        <th>Имя</th>
+                        <th>Фамилия</th>
+                        <th>Дата выдачи</th>
+                        <th>Сдать до</th>
+                        <th>Сдать?</th>
+                    </tr>
+                    <tr>
+                        <th>Some given_name</th>
+                        <th>Some surname</th>
+                        <th>Given_date</th>
+                        <th>Return_date</th>
+                        <th>
+                            <form action="#" method="POST">
+                                <input type="hidden" name="recordid">
+                                <input class="btn" type="submit" name="submit">
+                            </form>
+                        </th>                        
+                    </tr>
+                </table>
+            </div>
+            <div class=item>
+                <center><h3>Читатель</h3></center>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Имя</th>
+                        <th>Фамилия</th>
+                    </tr>
+                    <tr>
+                        <td>Some ID</td>
+                        <td>
+                            Some given_name
+                            <form action="#" method="POST">
+                                <input type="hidden" name="recordid" value="recordid">
+                                <input type="text" name="text" placeholder="Введите новое имя">
+                                <input class="btn" type="submit" name="submit" value="Изменить">
+                                <input class="btn" type="reset" name="reset" value="Сбросить">
+                            </form>
+                        </td>
+                        <td>
+                            Some surname
+                            <form action="#" method="POST">
+                                <input type="hidden" name="recordid" value="recordid">
+                                <input type="text" name="text" placeholder="Введите новую фамилию">
+                                <input class="btn" type="submit" name="submit" value="Изменить">
+                                <input class="btn" type="reset" name="reset" value="Сбросить">
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+                <center><h3>Книги на руках</h3></center>
+                <table>
+                    <tr>
+                        <th>Название</th>
+                        <th>Автор</th>
+                        <th>Дата выдачи</th>
+                        <th>Сдать до</th>
+                        <th>Сдать?</th>
+                    </tr>
+                    <tr>
+                        <td>Some title</td>
+                        <td>Some author</td>
+                        <td>Given_date</td>
+                        <td>Return_date</td>
+                        <td>
+                            <form action="#" method="POST">
+                                <input type="hidden" name="recordid">
+                                <input class="btn" type="submit" name="submit" value="Да">
+                            </form>
+                        </td>                        
+                    </tr>
+                </table>
+            </div>
         </div>        
     </div>
 </body>
