@@ -1,3 +1,4 @@
+<center><h3 class="headerFind">Все читатели</h3></center>
 <table>
     <tr>
         <th>ID</th>
@@ -16,7 +17,7 @@
         <td><?php echo $reader['id']; ?></td>
         <td><?php echo $reader['given_name']; ?></td>
         <td><?php echo $reader['surname']; ?></td>
-        <td><a href="#">Ссылка</a></td>
+        <td><a href="<?php echo '/dl/index.php?controller=readers&action=item&id=' . $reader['id']  ; ?>"">Ссылка</a></td>
         <td><a href="<?php echo '/dl/index.php?controller=readers&action=delete&id=' . $reader['id']  ; ?>">Удалить</a></td>
     </tr>
     <?php }?>

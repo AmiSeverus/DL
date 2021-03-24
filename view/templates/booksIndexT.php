@@ -1,4 +1,6 @@
-<table>
+<div>
+    <center><h3 class="headerFind">Все книги</h3></center>
+    <table>
     <tr>
         <th>ID</th>
         <th>Название</th>
@@ -18,12 +20,9 @@
         <td><?php echo $book['title']; ?></td>
         <td><?php echo $book['author']; ?></td>
         <td><?php echo $book['availamount']; ?></td>
-        <td><a href="#">Ссылка</a></td>
+        <td><a href="<?php echo '/dl/index.php?controller=books&action=item&id=' . $book['id']  ; ?>">Ссылка</a></td>
         <td><a href="<?php echo '/dl/index.php?controller=books&action=delete&id=' . $book['id']  ; ?>">Удалить</a></td>
     </tr>
     <?php }?>
 </table>
-
-
-
-
+</div>

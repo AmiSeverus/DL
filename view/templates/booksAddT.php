@@ -1,5 +1,5 @@
 <div class="find">
-    <h3 class="headerFind">Добавить книгу</h3>
+    <center><h3 class="headerFind">Добавить книгу</h3></center>
     <form action="/dl/index.php?controller=books&action=add" method="POST">
         <input required placeholder="Введите название" type="text" name='title'>
         <input required placeholder="Введите автора" type="text"  name="author">

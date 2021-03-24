@@ -48,13 +48,8 @@ class controller {
         return $this->renderAll('templates', $this->templateName, $data);
     }
     
-    public function testArray ($array, $key){
-        foreach ($array as $item) {
-            $idList[] =$item['id']; 
-        }
-        return in_array($key,$idList);
-    }
-    
+    //проверяем массив массивов, если среди подмассивов есть поле aйди равное ключу,
+    //если да возвращает подмассив
     public function getItem ($array, $key){
         foreach ($array as $item) {
             if ($item['id'] == $key){
@@ -62,5 +57,14 @@ class controller {
             }
         }
     }
+    
+    /*
+    public function getItem ($array, $key){
+        foreach ($array as $item) {
+            if ($item['id'] == $key){
+                return $item;
+            }
+        }
+    }*/
 }
 

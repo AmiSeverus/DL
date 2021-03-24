@@ -1,3 +1,4 @@
+<center><h3 class="headerFind">Журнал выдачи книг</h3></center>
 <table class='journal'>
     <tr>
         <th>ID</th>

@@ -15,7 +15,7 @@ class readersM extends model {
     }
     
     public function findReader($field, $value){
-        return $this->db->querySelect("select * from readers where {$this->db->escape($field)} ilike '{$this->db->escape($value)}'");
+        return $this->db->querySelect("select * from readers where {$this->db->escape($field)} ilike '%{$this->db->escape($value)}%' and active = true");
     }
     
     public function deleteReader($id){

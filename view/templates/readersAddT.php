@@ -1,5 +1,5 @@
 <div class="find">
-    <h3 class="headerFind">Добавить читателя</h3>
+    <center><h3 class="headerFind">Добавить читателя</h3></center>
     <form action="/dl/index.php?controller=readers&action=add" method="POST">
         <input required placeholder="Введите имя" type="text" name='given_name'>
         <input required placeholder="Введите фамилию" type="text"  name="surname">

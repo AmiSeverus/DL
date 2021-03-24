@@ -6,11 +6,11 @@ class journalM extends model {
     }
     
     public function getBookAmount($bookid){
-        return $this->db->querySelect("select availamount from books where id = $bookid");
+        return $this->db->querySelect("select availamount from books where id = {$this->db->escape($bookid)}");
     }
     
     public function setBookAmount($bookid, $amount){
-        $this->db->query("update books set availamount = $amount where id = $bookid");
+        $this->db->query("update books set availamount = $amount where id = {$this->db->escape($bookid)}");
     }
     
     public function giveOut($bookid,$readerid){
@@ -28,11 +28,27 @@ class journalM extends model {
                                         left join books t2
                                         on t1.book_id = t2.id
                                         left join readers t3
-                                        on t1.reader_id = t3.id;');
+                                        on t1.reader_id = t3.id
+                                        order by t1.id;');
+    }
+    
+    public function getRecordsBySomeId($some,$id){
+        return $this->db->querySelect('select 
+                                            t1.id, 
+                                            t1.reader_id,  
+                                            t1.book_id, 
+                                            t1.return_date_actual 
+                                        from journal t1
+                                        left join books t2
+                                        on t1.book_id = t2.id
+                                        left join readers t3
+                                        on t1.reader_id = t3.id
+                                        where t1.' . $this->db->escape($some) . '_id =' . $this->db->escape($id) .
+                                        ' order by t1.id;');
     }
     
     public function setDataStamp($dateStamp, $id){
-        $this->db->query("update journal set return_date_actual = '$dateStamp' where id = $id");
+        $this->db->query("update journal set return_date_actual = '$dateStamp' where id = {$this->db->escape($id)}");
     }
 }
 

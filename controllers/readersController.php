@@ -6,10 +6,12 @@ class readersController extends controller {
         $this->templateName = $this->getTemplate();
         $readers = $this->getModel()->getReaders();        
         if ($readers) {
-            echo $this->renderPage(['CONTENT' => $this->renderTemplate($readers)]);
+            $this->content = $this->renderTemplate($readers);
         } else {
-            echo $this->renderPage(['CONTENT' => 'База данных пуста']);
+            $this->content = 'База данных пуста';
         }
+        
+        echo $this->renderPage(['CONTENT' => $this->content]);
     }
     
     public function actionAdd(){
@@ -26,7 +28,7 @@ class readersController extends controller {
                 ){
                     $this->getModel()->reactivateReader($reader['id']);
                     $key++;
-                    echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>'Читатель восстановлен'])]);
+                    $this->content = $this->renderTemplate(['message'=>'Читатель восстановлен']);
                     break;
                 } else if 
                 (
@@ -35,20 +37,22 @@ class readersController extends controller {
                     $reader['active'] == 't'                         
                 ){
                     $key++;
-                    echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>'Читатель уже существует'])]);
+                    $this->content = $this->renderTemplate(['message'=>'Читатель уже существует']);
                     break;
                 } 
             }
             
             if ($key == 1){
                 $this->getModel()->addReader(request::getInstance()->post);
-                echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>'Читатель добавлен'])]);                    
+                $this->content = $this->renderTemplate(['message'=>'Читатель добавлен']);
             } else {
                 $key = 1;
             }    
         } else {
-            echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>''])]);            
+            $this->content = $this->renderTemplate(['message'=>'']);            
         }
+        
+        echo $this->renderPage(['CONTENT' => $this->content]);
     }
     
     public function actionFind(){
@@ -56,24 +60,48 @@ class readersController extends controller {
         if (request::getInstance()->post){
             $readers = $this->getModel()->findReader(request::getInstance()->post['searchField'] == 'По имени'? 'given_name':'surname', request::getInstance()->post['searchValue']);    
             if (!$readers){
-                echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>'Записей не найдено'])]);
+                $this->content = $this->renderTemplate(['message'=>'Записей не найдено']);
             } else {
                 $this->templateName = 'readersIndexT';
                 $message = $this->renderTemplate($readers);
                 $this->templateName = $this->getTemplate();
-                echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=> $message])]);
+                $this->content = $this->renderTemplate(['message'=> $message]);
             }
         } else {
-            echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>''])]);
+            $this->content = $this->renderTemplate(['message'=>'']);
         }
+        
+        echo $this->renderPage(['CONTENT'=> $this->content]);
     }
     
     public function actionDelete(){
         if (!request::getInstance()->id){
             throw new Exception('Что-то пошло не так');
         }
-        $this->getModel()->deleteReader(request::getInstance()->id);
-        echo $this->renderPage(['CONTENT'=> 'Запись удалена']);
+        $records = $records = $this->getModel('journal')->getRecordsBySomeId(substr(request::getInstance()->controller, 0,-1),request::getInstance()->id);
+        if (empty($records)){
+            $this->getModel()->deleteReader(request::getInstance()->id);
+            $this->content = 'Читатель удален';
+        } else {
+            $key = 0;
+            foreach ($records as $record) {
+                if ($record['reader_id'] == request::getInstance()->id && empty($record['return_date_actual'])) {
+                    $key=1;
+                }
+            }
+            if ($key > 0){
+                $this->content = 'Читатель не может быть удален: на руках имеются книги';                
+            } else {
+                $this->getModel()->deleteReader(request::getInstance()->id);
+                $this->content = 'Читатель удален';
+            }
+        }
+        echo $this->renderPage(['CONTENT'=> $this->content]); 
+    }
+    
+    public function actionItem(){
+        $this->templateName = $this->getTemplate();
+        echo $this->renderPage(['CONTENT'=>$this->renderTemplate()]);
     }
 }
 

@@ -5,13 +5,14 @@
 class booksController extends controller {
     
     public function actionIndex(){
-        $this->templateName = $this->getTemplate();
         $books = $this->getModel()->getBooks();
         if ($books) {
-            echo $this->renderPage(['CONTENT' => $this->renderTemplate($books)]);
+            $this->templateName = $this->getTemplate();
+            $this->content = $this->renderTemplate($books);
         } else {
-            echo $this->renderPage(['CONTENT' => 'База данных пуста']);
-        }
+            $this->content = 'База данных пуста';
+        }        
+        echo $this->renderPage(['CONTENT'=> $this->content]);
     }
     
     public function actionAdd(){
@@ -28,7 +29,7 @@ class booksController extends controller {
                 ){
                     $this->getModel()->reactivateBook($book['id']);
                     $key++;
-                    echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>'Книга восстановлена'])]);
+                    $this->content= $this->renderTemplate(['message'=>'Книга восстановлена, количество не обновлено']);
                     break;
                 } else if 
                 (
@@ -37,20 +38,22 @@ class booksController extends controller {
                     $book['active'] == 't'                       
                 ){
                     $key++;
-                    echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>'Книга уже существует'])]);
+                    $this->content = $this->renderTemplate(['message'=>'Книга уже существует']);
                     break;
                 } 
             }
             
             if ($key == 1){
                 $this->getModel()->addBook(request::getInstance()->post);
-                echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>'Книга добавлена'])]);
+                $this->content = $this->renderTemplate(['message'=>'Книга добавлена']);
             } else {
                 $key = 1;
             }              
         } else {
-            echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>''])]);            
+            $this->content = $this->renderTemplate(['message'=>'']);
         }
+        
+        echo $this->renderPage(['CONTENT'=> $this->content]);
     }
     
     public function actionFind(){
@@ -58,24 +61,49 @@ class booksController extends controller {
         if (request::getInstance()->post){
             $books = $this->getModel()->findBook(request::getInstance()->post['searchField'] == 'По названию'? 'title':'author', request::getInstance()->post['searchValue']);    
             if (!$books){
-                echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>'Записей не найдено'])]);
+                $this->content = $this->renderTemplate(['message'=>'Записей не найдено']);
             } else {
                 $this->templateName = 'booksIndexT';
                 $message = $this->renderTemplate($books);
                 $this->templateName = $this->getTemplate();
-                echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=> $message])]);
+                $this->content = $this->renderTemplate(['message'=> $message]);
             }
         } else {
-            echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['message'=>''])]);
-        } 
+            $this->content = $this->renderTemplate(['message'=>'']);
+        }
+        
+        echo $this->renderPage(['CONTENT'=> $this->content]);
     }
     
     public function actionDelete(){
         if (!request::getInstance()->id){
             throw new Exception('Что-то пошло не так');
         }
-        $this->getModel()->deleteBook(request::getInstance()->id);
-        echo $this->renderPage(['CONTENT'=> 'Запись удалена']);
+        $records = $this->getModel('journal')->getRecordsBySomeId(substr(request::getInstance()->controller, 0,-1),request::getInstance()->id);
+        if (empty($records)){
+            $this->getModel()->deleteBook(request::getInstance()->id);
+            $this->content = 'Книга удалена';            
+        } else {
+            $key = 0;
+            foreach ($records as $record) {
+                if ($record['book_id'] == request::getInstance()->id && empty($record['return_date_actual'])) {
+                    $key=1;
+                }
+            }
+            if ($key > 0){
+                $this->content = 'Книга не может быть удалена: не все были возвращены';
+            } else {
+                $this->getModel()->deleteBook(request::getInstance()->id);
+                $this->content = 'Книга удалена';                
+            }
+        }
+        
+        echo $this->renderPage(['CONTENT'=> $this->content]);
+    }
+    
+    public function actionItem(){
+        $this->templateName = $this->getTemplate();
+        echo $this->renderPage(['CONTENT'=> $this->renderTemplate()]);
     }
 }
 

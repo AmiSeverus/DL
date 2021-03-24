@@ -1,5 +1,6 @@
 <div class='dl'>               
     <div class='giveOut'>
+        <center><h3 class="headerFind">Детали предполагаемой выдачи</h3></center>
         <table style="width: 100%;">
             <tr>
                 <th colspan="2">
@@ -27,16 +28,16 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <td rowspan="2">
                     <?php echo $book['title'] ;?>
                 </td>
-                <td>
+                <td rowspan="2">
                     <?php echo $book['author'] ;?>
                 </td>
-                <td>
+                <td rowspan="2">
                     <?php echo $reader['given_name'] ;?>
                 </td>
-                <td>
+                <td rowspan="2">
                     <?php echo $reader['surname'] ;?>                        
                 </td>
                 <td>
@@ -46,6 +47,11 @@
                         <input class="giveOutBtn" name="submit" type="submit" value="Выдать">    
                     </form>
                 </td>
+            </tr>
+            <tr>
+                <td>
+                    <a class='reset' href='/dl/index.php?controller=journal&action=choosebook'>Сбросить</a>
+                </td>                      
             </tr>
         </table>
     </div>

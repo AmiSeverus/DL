@@ -63,7 +63,7 @@
         font-size: 0.8em;
     }
 
-    .journal {
+    .journalMain {
         display: flex;
         position:relative;
         align-items: center;
@@ -164,20 +164,44 @@
         border-spacing: 0;
     }
 
+    .giveOut form {
+        margin-bottom: 0;
+        height: 50%;
+    }
     .giveOut td, .giveOut th {
         border: 1px solid black;
     }
 
     .giveOutBtn {
-        border: none; 
+        border: none;
         width: 100%; 
         cursor: pointer;
         background-color: inherit;
+        margin: 2px 0;
+        min-height: 0;
+        height:100%;
+        padding: 0;
     }
 
     .giveOutBtn:hover {
         color: blue;
         background-color: inherit;
+    }
+    
+    .reset{
+        text-decoration: none;
+        color: black;
+        cursor: pointer;
+        width: 100%;
+        margin: 2px 0;
+        height: 100%;
+        font-size: 0.7em;
+        background-color: inherit;
+        opacity: 0.8;
+    }
+    
+    .reset:hover{
+        color: blue;
     }
     
     button {
@@ -206,6 +230,25 @@
     }
 
     .journal input:hover {
+        color: blue;
+    }
+    
+    .item table {
+    border-spacing: 0;
+    }
+
+    .item tr, .item th, .item td {
+        border: 1px solid black;
+        padding: 5px;
+    }
+
+    .item input .btn {
+        border: none; 
+        width: 100%; 
+        cursor: pointer;
+    }
+
+    .item input .btn:hover {
         color: blue;
     }
     
@@ -249,12 +292,12 @@
                 </div>
             </div>
         </div>
-        <div class='journal'>
+        <div class='journalMain'>
             <center>
                 <a href="/dl/index.php?controller=journal&action=choosebook">Выдать книгу читателю</a>
             </center>
         </div>
-        <div class='journal'>
+        <div class='journalMain'>
             <center>
                 <a href="/dl/index.php?controller=journal">Показать журнал выдачи</a>
             </center>
