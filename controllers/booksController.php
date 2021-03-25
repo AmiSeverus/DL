@@ -156,8 +156,7 @@ class booksController extends controller {
             echo '<pre>';
             foreach ($allBooks as $value){
                 if (
-                        $checkLine == strtolower($value[array_keys($value)[1]] . $value[array_keys($value)[2]]) && 
-                        strtolower(trim(request::getInstance()->post[array_keys(request::getInstance()->post)[1]])) != strtolower($book[array_keys(request::getInstance()->post)[1]])
+                        $checkLine == strtolower($value[array_keys($value)[1]] . $value[array_keys($value)[2]]) //сравнение новой строки с текущими из базы данных
                     ){
                     throw new Exception('Нельзя создать дубликат даже удаленной книги');
                 }
