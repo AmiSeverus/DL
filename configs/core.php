@@ -32,7 +32,7 @@ class core{
         $this->testStr ($action);
         
         if (request::getInstance()->id){
-            $this->testNum(request::getInstance()->id);
+            $this->testNum(request::getInstance()->id+1);
         }
         
         if (array_key_exists('bookid', request::getInstance()->get)){
