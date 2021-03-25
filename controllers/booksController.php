@@ -25,8 +25,8 @@ class booksController extends controller {
             foreach ($books as $book){
               if 
                 (
-                    $book['title'] == request::getInstance()->post['title'] &&
-                    $book['author'] == request::getInstance()->post['author'] &&
+                    strtolower($book['title']) == strtolower(trim(request::getInstance()->post['title'])) &&
+                    strtolower($book['author']) == strtolower(trim(request::getInstance()->post['author'])) &&
                     $book['active'] == 'f'
                 ){
                     $this->getModel()->reactivateBook($book['id']);
@@ -35,8 +35,8 @@ class booksController extends controller {
                     break;
                 } else if 
                 (
-                    $book['title'] == request::getInstance()->post['title'] &&
-                    $book['author'] == request::getInstance()->post['author'] &&
+                    strtolower($book['title']) == strtolower(trim(request::getInstance()->post['title'])) &&
+                    strtolower($book['author']) == strtolower(trim(request::getInstance()->post['author'])) &&
                     $book['active'] == 't'                       
                 ){
                     $key++;
