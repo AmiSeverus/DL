@@ -34,7 +34,7 @@ class readersController extends controller {
                 } else if 
                 (
                     strtolower(trim($reader['given_name'])) == strtolower(trim(request::getInstance()->post['given_name'])) &&
-                    strtolower(trim($reader['surname']) == strtolower(trim(request::getInstance()->post['surname'])) &&
+                    strtolower(trim($reader['surname'])) == strtolower(trim(request::getInstance()->post['surname'])) &&
                     $reader['active'] == 't'                         
                 ){
                     $key++;
