@@ -151,7 +151,8 @@ class readersController extends controller {
             $allReaders = $this->getModel()->getAllReaders();
             foreach ($allReaders as $value){
                 if (
-                        $checkLine == strtolower($value[array_keys($value)[1]] . $value[array_keys($value)[2]]) //сравнение новой строки с текущими из базы данных
+                        $checkLine == strtolower($value[array_keys($value)[1]] . $value[array_keys($value)[2]]) && //сравнение новой строки с текущими из базы данных
+                        strtolower(trim(request::getInstance()->post[array_keys(request::getInstance()->post)[1]])) != strtolower($reader[array_keys(request::getInstance()->post)[1]]) //сравнение новой строки с со старой, чтоб не выкидывало исключения
                     ){
                     throw new Exception('Нельзя создать дубликат даже удаленного читателя');
                 }
