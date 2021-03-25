@@ -23,7 +23,7 @@ class booksM extends model {
     }
     
     public function findBook($field, $value){
-        return $this->db->querySelect("select * from books where {$this->db->escape($field)} ilike '%{$this->db->escape($value)}%' and active = true");
+        return $this->db->querySelect("select * from books where {$this->db->escape($field)} ilike '%{$this->db->escape($value)}%' and active = true and availamount >0");
     }
     
     public function deleteBook($id){
