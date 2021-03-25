@@ -23,8 +23,8 @@ class readersController extends controller {
             foreach ($readers as $reader){
               if 
                 (
-                    strtolower($reader['given_name']) == strtolower(trim(request::getInstance()->post['given_name'])) &&
-                    strtolower($reader['surname']) == strtolower(trim(request::getInstance()->post['surname'])) &&
+                    strtolower(trim($reader['given_name'])) == strtolower(trim(request::getInstance()->post['given_name'])) &&
+                    strtolower(trim($reader['surname'])) == strtolower(trim(request::getInstance()->post['surname'])) &&
                     $reader['active'] == 'f'
                 ){
                     $this->getModel()->reactivateReader($reader['id']);
@@ -33,8 +33,8 @@ class readersController extends controller {
                     break;
                 } else if 
                 (
-                    strtolower($reader['given_name']) == strtolower(trim(request::getInstance()->post['given_name'])) &&
-                    strtolower($reader['surname']) == strtolower(trim(request::getInstance()->post['surname'])) &&
+                    strtolower(trim($reader['given_name'])) == strtolower(trim(request::getInstance()->post['given_name'])) &&
+                    strtolower(trim($reader['surname']) == strtolower(trim(request::getInstance()->post['surname'])) &&
                     $reader['active'] == 't'                         
                 ){
                     $key++;
@@ -44,7 +44,7 @@ class readersController extends controller {
             }
             
             if ($key == 1){
-                $this->getModel()->addReader(trim(request::getInstance()->post));
+                $this->getModel()->addReader(request::getInstance()->post);
                 $this->content = $this->renderTemplate(['message'=>'Читатель добавлен']);
             } else {
                 $key = 1;
