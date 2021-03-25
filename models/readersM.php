@@ -19,11 +19,11 @@ class readersM extends model {
     }
     
     public function addReader($form){
-        $this->db->query("insert into readers (given_name,surname) values ('{$this->db->escape($form['given_name'])}' , '{$this->db->escape($form['surname'])}')");
+        $this->db->query("insert into readers (given_name,surname) values ('{$this->db->escape(trim($form['given_name']))}' , '{$this->db->escape(trim($form['surname']))}')");
     }
     
     public function findReader($field, $value){
-        return $this->db->querySelect("select * from readers where {$this->db->escape($field)} ilike '%{$this->db->escape($value)}%' and active = true");
+        return $this->db->querySelect("select * from readers where {$this->db->escape($field)} ilike '%{$this->db->escape(trim($value))}%' and active = true");
     }
     
     public function deleteReader($id){

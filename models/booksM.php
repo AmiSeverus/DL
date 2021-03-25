@@ -19,11 +19,11 @@ class booksM extends model {
     }
     
     public function addBook($form){
-        $this->db->query("insert into books (title,author,availamount) values ('{$this->db->escape($form['title'])}' , '{$this->db->escape($form['author'])}' , {$this->db->escape($form['availamount'])})");
+        $this->db->query("insert into books (title,author,availamount) values ('{$this->db->escape(trim($form['title']))}' , '{$this->db->escape(trim($form['author']))}' , {$this->db->escape($form['availamount'])})");
     }
     
     public function findBook($field, $value){
-        return $this->db->querySelect("select * from books where {$this->db->escape($field)} ilike '%{$this->db->escape($value)}%' and active = true and availamount >0");
+        return $this->db->querySelect("select * from books where {$this->db->escape($field)} ilike '%{$this->db->escape(trim($value))}%' and active = true and availamount >0");
     }
     
     public function deleteBook($id){
