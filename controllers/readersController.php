@@ -20,8 +20,9 @@ class readersController extends controller {
         if (request::getInstance()->post){
             $this->checkInputData(request::getInstance()->post);
             $readers = $this->getModel()->getAllReaders();
+            
             foreach ($readers as $reader){
-              if 
+                if //почему strtolower не работает для readers?
                 (
                     strtolower(trim($reader['given_name'])) == strtolower(trim(request::getInstance()->post['given_name'])) &&
                     strtolower(trim($reader['surname'])) == strtolower(trim(request::getInstance()->post['surname'])) &&
