@@ -13,7 +13,7 @@
                 <?php echo $reader['given_name'] ;?>
                 <form action="#" method="POST">
                     <input type="hidden" name="recordid" value="recordid">
-                    <input autocomplete="off" type="text" name="text" placeholder="Введите новое имя">
+                    <input required autocomplete="off" type="text" name="text" placeholder="Введите новое имя">
                     <input class="btn" type="submit" name="submit" value="Изменить">
                     <input class="btn" type="reset" name="reset" value="Сбросить">
                 </form>
@@ -22,7 +22,7 @@
                 <?php echo $reader['surname'] ;?>
                 <form action="#" method="POST">
                     <input type="hidden" name="recordid" value="recordid">
-                    <input autocomplete="off" type="text" name="text" placeholder="Введите новую фамилию">
+                    <input required autocomplete="off" type="text" name="text" placeholder="Введите новую фамилию">
                     <input class="btn" type="submit" name="submit" value="Изменить">
                     <input class="btn" type="reset" name="reset" value="Сбросить">
                 </form>

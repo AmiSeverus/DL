@@ -76,14 +76,14 @@ class core{
     public function testStr ($str){
         for ($i=0; $i < strlen($str); $i++){
             if (!($str[$i] >= 'A' && $str[$i]<= 'z')){
-                throw new Exception ();
+                throw new Exception ('Что-то пошло не так');
             }
         }
     }
     
     public function testNum($number){
         if (!is_int(+$number) || +$number <= 0){
-            throw new Exception ();
+            throw new Exception ('Что-то пошло не так');
         }
     }
 }

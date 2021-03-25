@@ -22,4 +22,5 @@ class request {
         $this->id = $this->get['id'] ?? '';
         unset($this->get['controller'], $this->get['action'], $this->get['id']);
     }
+    
 }

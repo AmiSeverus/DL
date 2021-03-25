@@ -57,5 +57,19 @@ class controller {
             }
         }
     }
+    
+    public function checkInputData($post){
+        foreach($post as $key=>$value){
+            if ($key == 'availamount'){
+                if ($value > 1048576){
+                    throw new Exception('Что-то пошло не так');
+                }
+            } else {
+                if (empty(trim($value)) || strlen(trim($value)) > 50){
+                    throw new Exception('Что-то пошло не так');
+                }
+            }
+        }
+    }
 }
 

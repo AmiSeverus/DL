@@ -8,6 +8,7 @@ class journalController extends controller {
         
         $this->templateName = $this->getTemplate();
         if (request::getInstance()->post){
+            $this->checkInputData(request::getInstance()->post);
             $booksList = $this->getModel('books')->findBook(request::getInstance()->post['searchField'] == 'По названию'? 'title':'author', request::getInstance()->post['searchValue']);    
             if ($booksList){
                 $this->books = $booksList;
@@ -20,6 +21,7 @@ class journalController extends controller {
 
         $this->templateName = $this->getTemplate();
         if (request::getInstance()->post){
+            $this->checkInputData(request::getInstance()->post);
             $readersList = $this->getModel('readers')->findReader(request::getInstance()->post['searchField'] == 'По имени'? 'given_name':'surname', request::getInstance()->post['searchValue']);    
             if ($readersList){
                 $this->readers = $readersList;
@@ -37,27 +39,28 @@ class journalController extends controller {
     public function actionGiveout(){
         if (!request::getInstance()->post){
             if (!array_key_exists('bookid', request::getInstance()->get) || !array_key_exists('bookid', request::getInstance()->get)){
-                throw new Exception();
+                throw new Exception('Что-то пошло не так');
             } 
             if (!request::getInstance()->get['bookid'] > 0 || !request::getInstance()->get['readerid']) {
-                throw new Exception;
+                throw new Exception('Что-то пошло не так');
             }
             $book = $this->getItem($this->getModel()->getAvailBooks(), request::getInstance()->get['bookid']);
             
             $reader = $this->getItem($this->getModel('readers')->getReaders(), request::getInstance()->get['readerid']);
             
             if (empty($book) || empty($reader)){
-                throw new Exception;;
+                throw new Exception('Что-то пошло не так');
             }
             
             $this->templateName = $this->getTemplate();
             $this->content = $this->renderTemplate(['book'=>$book, 'reader'=>$reader]);       
         } else {
+            $this->checkInputData(request::getInstance()->post);
             if (!array_key_exists('bookid', request::getInstance()->post) || !array_key_exists('readerid', request::getInstance()->post)){
-                throw new Exception;
+                throw new Exception('Что-то пошло не так');
             }
             if (!request::getInstance()->post['bookid'] > 0 || !request::getInstance()->post['readerid'] > 0){
-                throw new Exception;
+                throw new Exception('Что-то пошло не так');
             }
             //делаем запись в журнале
             $this->getModel()->giveOut(+request::getInstance()->post['bookid'], +request::getInstance()->post['readerid']);
@@ -95,6 +98,7 @@ class journalController extends controller {
     }
     
     public function actionReturn(){
+        $this->checkInputData(request::getInstance()->post);
         $dateStamp = date('Y-m-d');
         $this->getModel()->setDataStamp($dateStamp, +request::getInstance()->post['recordid']);
         $amount = $this->getModel()->getBookAmount(+request::getInstance()->post['bookid'])[0]['availamount'];

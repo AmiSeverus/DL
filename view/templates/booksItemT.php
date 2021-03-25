@@ -12,28 +12,28 @@
             <td><?php echo $book['id'] ;?></td>
             <td>
                 <?php echo $book['title'] ;?>
-                <form action="#" method="POST">
+                <form action="/dl/index.php?controller=books&action=change&id=<?php echo $book['id'] ;?>" method="POST">
                     <input type="hidden" name="id" value=<?php echo $book['id'] ;?>>
-                    <input autocomplete="off" type="text" name="text" placeholder="Введите новое название">
-                    <input class="btn" type="submit" name="submit" value="Изменить">
+                    <input required autocomplete="off" type="text" name="title" placeholder="Введите новое название">
+                    <input class="btn" type="submit" name="books" value="Изменить">
                     <input class="btn" type="reset" name="reset" value="Сбросить">
                 </form>
             </td>
             <td>
                 <?php echo $book['author'] ;?>
-                <form action="#" method="POST">
+                <form action="/dl/index.php?controller=books&action=change&id=<?php echo $book['id'] ;?>" method="POST">
                     <input type="hidden" name="id" value=<?php echo $book['id'] ;?>>
-                    <input autocomplete="off" type="text" name="text" placeholder="Введите нового автора">
-                    <input class="btn" type="submit" name="submit" value="Изменить">
+                    <input required autocomplete="off" type="text" name="author" placeholder="Введите нового автора">
+                    <input class="btn" type="submit" name="books" value="Изменить">
                     <input class="btn" type="reset" name="reset" value="Сбросить">
                 </form>
             </td>
             <td>
                 <?php echo $book['availamount'] ;?>
-                <form action="#" method="POST">
+                <form action="/dl/index.php?controller=books&action=change&id=<?php echo $book['id'] ;?>" method="POST">
                     <input type="hidden" name="id" value=<?php echo $book['id'] ;?>>
-                    <input autocomplete="off" min="0" type="amount" name="text" placeholder="Введите новое количество">
-                    <input class="btn" type="submit" name="submit" value="Изменить">
+                    <input required autocomplete="off" min="0" type="number" name="availamount" placeholder="Введите новое количество">
+                    <input class="btn" type="submit" name="books" value="Изменить">
                     <input class="btn" type="reset" name="reset" value="Сбросить">
                 </form>
             </td>

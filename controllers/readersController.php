@@ -18,6 +18,7 @@ class readersController extends controller {
         $key = 1;
         $this->templateName = $this->getTemplate();
         if (request::getInstance()->post){
+            $this->checkInputData(request::getInstance()->post);
             $readers = $this->getModel()->getAllReaders();
             foreach ($readers as $reader){
               if 
@@ -101,7 +102,7 @@ class readersController extends controller {
     
     public function actionItem(){
         if (empty(request::getInstance()->id) || request::getInstance()->id <=0){
-            throw new Exception;
+            throw new Exception('Что-то пошло не так');
         }
         $reader = $this->getModel()->getReaderByAttr('id',request::getInstance()->id)[0];
         $records = $this->getModel('journal')->getRecordsBySomeId(substr(request::getInstance()->controller, 0,-1),request::getInstance()->id);
@@ -133,6 +134,31 @@ class readersController extends controller {
         }        
         $this->templateName = $this->getTemplate();
         echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['reader'=>$reader, 'records'=>$records])]);
+    }
+    
+    public function actionChange(){
+        if (!request::getInstance()->post){
+            throw new Exception('Что-то пошло не так');
+        }
+        $this->checkInputData(request::getInstance()->post);
+        
+        $reader = $this->getModel()->getReaderByAttr('id',request::getInstance()->post['id'])[0];
+        
+        $newReader = $reader;
+        $newReader[array_keys(request::getInstance()->post)[1]] = trim(request::getInstance()->post[array_keys(request::getInstance()->post)[1]]);
+            $checkLine = strtolower($newReader[array_keys($newReader)[1]] . $newReader[array_keys($newReader)[2]]);
+            $allReaders = $this->getModel()->getAllReaders();
+            foreach ($allReaders as $value){
+                if (
+                        $checkLine == strtolower($value[array_keys($value)[1]] . $value[array_keys($value)[2]]) && 
+                        strtolower(trim(request::getInstance()->post[array_keys(request::getInstance()->post)[1]])) != strtolower($reader[array_keys(request::getInstance()->post)[1]])
+                    ){
+                    throw new Exception('Нельзя создать дубликат даже удаленного читателя');
+                }
+            }
+            $this->getModel()->setReaderAtt(array_keys(request::getInstance()->post)[1], trim(request::getInstance()->post[array_keys(request::getInstance()->post)[1]]), request::getInstance()->post['id']);
+                  
+        header ('Location: /dl/index.php?controller=readers&action=item&id=' . request::getInstance()->post['id']);
     }
 }
 

@@ -16,9 +16,11 @@ class booksController extends controller {
     }
     
     public function actionAdd(){
+        
         $key = 1;
         $this->templateName = $this->getTemplate();
         if (request::getInstance()->post){
+            $this->checkInputData(request::getInstance()->post);
             $books = $this->getModel()->getAllBooks();
             foreach ($books as $book){
               if 
@@ -104,7 +106,7 @@ class booksController extends controller {
     public function actionItem(){
         
         if (empty(request::getInstance()->id) || request::getInstance()->id <=0){
-            throw new Exception;
+            throw new Exception('Что-то пошло не так');
         }
         $book = $this->getModel()->getBookByAttr('id',request::getInstance()->id)[0];
         $records = $this->getModel('journal')->getRecordsBySomeId(substr(request::getInstance()->controller, 0,-1),request::getInstance()->id);
@@ -133,13 +135,38 @@ class booksController extends controller {
                 $res[]=$item;
             }
         $records = $res;            
-        }
-        
-        
-        
+        }        
         $this->templateName = $this->getTemplate();
         echo $this->renderPage(['CONTENT'=> $this->renderTemplate(['book'=>$book, 'records'=>$records])]);
     }
+    
+    public function actionChange(){
+        if (!request::getInstance()->post){
+            throw new Exception('Что-то пошло не так');
+        }
+        $this->checkInputData(request::getInstance()->post);
+        
+        $book = $this->getModel()->getBookByAttr('id',request::getInstance()->post['id'])[0];
+        
+        if (array_keys(request::getInstance()->post)[1] != 'availamount'){
+            $newBook = $book;
+            $newBook[array_keys(request::getInstance()->post)[1]] = trim(request::getInstance()->post[array_keys(request::getInstance()->post)[1]]);
+            $checkLine = strtolower($newBook[array_keys($newBook)[1]] . $newBook[array_keys($newBook)[2]]);
+            $allBooks = $this->getModel()->getAllBooks();
+            echo '<pre>';
+            foreach ($allBooks as $value){
+                if (
+                        $checkLine == strtolower($value[array_keys($value)[1]] . $value[array_keys($value)[2]]) && 
+                        strtolower(trim(request::getInstance()->post[array_keys(request::getInstance()->post)[1]])) != strtolower($book[array_keys(request::getInstance()->post)[1]])
+                    ){
+                    throw new Exception('Нельзя создать дубликат даже удаленной книги');
+                }
+            }
+            $this->getModel()->setBookAtt(array_keys(request::getInstance()->post)[1], trim(request::getInstance()->post[array_keys(request::getInstance()->post)[1]]), request::getInstance()->post['id']);
+        } else {
+            $this->getModel('journal')->setBookAmount(request::getInstance()->post['id'], request::getInstance()->post['availamount']);
+        }    
+        
+        header ('Location: /dl/index.php?controller=books&action=item&id=' . request::getInstance()->post['id']);
+    }
 }
-
-
