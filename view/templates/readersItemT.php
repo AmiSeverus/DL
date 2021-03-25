@@ -11,19 +11,19 @@
             <td><?php echo $reader['id'] ;?></td>
             <td>
                 <?php echo $reader['given_name'] ;?>
-                <form action="#" method="POST">
-                    <input type="hidden" name="recordid" value="recordid">
-                    <input required autocomplete="off" type="text" name="text" placeholder="Введите новое имя">
-                    <input class="btn" type="submit" name="submit" value="Изменить">
+                <form action="/dl/index.php?controller=readers&action=change&id=<?php echo $reader['id'] ;?>" method="POST">
+                    <input type="hidden" name="id" value=<?php echo $reader['id'] ;?>>
+                    <input required autocomplete="off" type="text" name="given_name" placeholder="Введите новое имя">
+                    <input class="btn" type="submit" name="readers" value="Изменить">
                     <input class="btn" type="reset" name="reset" value="Сбросить">
                 </form>
             </td>
             <td>
                 <?php echo $reader['surname'] ;?>
-                <form action="#" method="POST">
-                    <input type="hidden" name="recordid" value="recordid">
-                    <input required autocomplete="off" type="text" name="text" placeholder="Введите новую фамилию">
-                    <input class="btn" type="submit" name="submit" value="Изменить">
+                <form action="/dl/index.php?controller=readers&action=change&id=<?php echo $reader['id'] ;?>" method="POST">
+                    <input type="hidden" name="id" value=<?php echo $reader['id'] ;?>>
+                    <input required autocomplete="off" type="text" name="surname" placeholder="Введите новую фамилию">
+                    <input class="btn" type="submit" name="readers" value="Изменить">
                     <input class="btn" type="reset" name="reset" value="Сбросить">
                 </form>
             </td>
