@@ -25,8 +25,8 @@ class booksController extends controller {
             foreach ($books as $book){
               if 
                 (
-                    strtolower($book['title']) == strtolower(trim(request::getInstance()->post['title'])) &&
-                    strtolower($book['author']) == strtolower(trim(request::getInstance()->post['author'])) &&
+                    mb_strtoLower($book['title']) == mb_strtoLower(trim(request::getInstance()->post['title'])) &&
+                    mb_strtoLower($book['author']) == mb_strtoLower(trim(request::getInstance()->post['author'])) &&
                     $book['active'] == 'f'
                 ){
                     $this->getModel()->reactivateBook($book['id']);
@@ -35,8 +35,8 @@ class booksController extends controller {
                     break;
                 } else if 
                 (
-                    strtolower($book['title']) == strtolower(trim(request::getInstance()->post['title'])) &&
-                    strtolower($book['author']) == strtolower(trim(request::getInstance()->post['author'])) &&
+                    mb_strtoLower($book['title']) == mb_strtoLower(trim(request::getInstance()->post['title'])) &&
+                    mb_strtoLower($book['author']) == mb_strtoLower(trim(request::getInstance()->post['author'])) &&
                     $book['active'] == 't'                       
                 ){
                     $key++;
@@ -151,12 +151,12 @@ class booksController extends controller {
         if (array_keys(request::getInstance()->post)[1] != 'availamount'){
             $newBook = $book;
             $newBook[array_keys(request::getInstance()->post)[1]] = trim(request::getInstance()->post[array_keys(request::getInstance()->post)[1]]);
-            $checkLine = strtolower($newBook[array_keys($newBook)[1]] . $newBook[array_keys($newBook)[2]]);
+            $checkLine = mb_strtoLower($newBook[array_keys($newBook)[1]] . $newBook[array_keys($newBook)[2]]);
             $allBooks = $this->getModel()->getAllBooks();
             foreach ($allBooks as $value){
                 if (
-                        $checkLine == strtolower($value[array_keys($value)[1]] . $value[array_keys($value)[2]]) && //сравнение новой строки с текущими из базы данных
-                        strtolower(trim(request::getInstance()->post[array_keys(request::getInstance()->post)[1]])) != strtolower($book[array_keys(request::getInstance()->post)[1]]) //сравнение новой строки с со старой, чтоб не выкидывало исключения
+                        $checkLine == mb_strtoLower($value[array_keys($value)[1]] . $value[array_keys($value)[2]]) && //сравнение новой строки с текущими из базы данных
+                        mb_strtoLower(trim(request::getInstance()->post[array_keys(request::getInstance()->post)[1]])) != mb_strtoLower($book[array_keys(request::getInstance()->post)[1]]) //сравнение новой строки с со старой, чтоб не выкидывало исключения
                     ){
                     throw new Exception('Нельзя создать дубликат даже удаленной книги');
                 }

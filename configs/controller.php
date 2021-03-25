@@ -65,7 +65,7 @@ class controller {
                     throw new Exception('Что-то пошло не так');
                 }
             } else {
-                if (empty(trim($value)) || strlen(trim($value)) > 150){
+                if (empty(trim($value)) || mb_strlen(trim($value)) > 150){
                     throw new Exception('Что-то пошло не так');
                 }
             }

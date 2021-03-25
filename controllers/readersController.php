@@ -22,10 +22,10 @@ class readersController extends controller {
             $readers = $this->getModel()->getAllReaders();
             
             foreach ($readers as $reader){
-                if //почему strtolower не работает для readers?
+                if //почему mb_strtoLower не работает для readers?
                 (
-                    strtolower(trim($reader['given_name'])) == strtolower(trim(request::getInstance()->post['given_name'])) &&
-                    strtolower(trim($reader['surname'])) == strtolower(trim(request::getInstance()->post['surname'])) &&
+                    mb_strtoLower(trim($reader['given_name'])) == mb_strtoLower(trim(request::getInstance()->post['given_name'])) &&
+                    mb_strtoLower(trim($reader['surname'])) == mb_strtoLower(trim(request::getInstance()->post['surname'])) &&
                     $reader['active'] == 'f'
                 ){
                     $this->getModel()->reactivateReader($reader['id']);
@@ -34,8 +34,8 @@ class readersController extends controller {
                     break;
                 } else if 
                 (
-                    strtolower(trim($reader['given_name'])) == strtolower(trim(request::getInstance()->post['given_name'])) &&
-                    strtolower(trim($reader['surname'])) == strtolower(trim(request::getInstance()->post['surname'])) &&
+                    mb_strtoLower(trim($reader['given_name'])) == mb_strtoLower(trim(request::getInstance()->post['given_name'])) &&
+                    mb_strtoLower(trim($reader['surname'])) == mb_strtoLower(trim(request::getInstance()->post['surname'])) &&
                     $reader['active'] == 't'                         
                 ){
                     $key++;
@@ -147,12 +147,12 @@ class readersController extends controller {
         
         $newReader = $reader;
         $newReader[array_keys(request::getInstance()->post)[1]] = trim(request::getInstance()->post[array_keys(request::getInstance()->post)[1]]);
-            $checkLine = strtolower($newReader[array_keys($newReader)[1]] . $newReader[array_keys($newReader)[2]]);
+            $checkLine = mb_strtoLower($newReader[array_keys($newReader)[1]] . $newReader[array_keys($newReader)[2]]);
             $allReaders = $this->getModel()->getAllReaders();
             foreach ($allReaders as $value){
                 if (
-                        $checkLine == strtolower($value[array_keys($value)[1]] . $value[array_keys($value)[2]]) && //сравнение новой строки с текущими из базы данных
-                        strtolower(trim(request::getInstance()->post[array_keys(request::getInstance()->post)[1]])) != strtolower($reader[array_keys(request::getInstance()->post)[1]]) //сравнение новой строки с со старой, чтоб не выкидывало исключения
+                        $checkLine == mb_strtoLower($value[array_keys($value)[1]] . $value[array_keys($value)[2]]) && //сравнение новой строки с текущими из базы данных
+                        mb_strtoLower(trim(request::getInstance()->post[array_keys(request::getInstance()->post)[1]])) != mb_strtoLower($reader[array_keys(request::getInstance()->post)[1]]) //сравнение новой строки с со старой, чтоб не выкидывало исключения
                     ){
                     throw new Exception('Нельзя создать дубликат даже удаленного читателя');
                 }
