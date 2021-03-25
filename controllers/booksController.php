@@ -153,7 +153,6 @@ class booksController extends controller {
             $newBook[array_keys(request::getInstance()->post)[1]] = trim(request::getInstance()->post[array_keys(request::getInstance()->post)[1]]);
             $checkLine = strtolower($newBook[array_keys($newBook)[1]] . $newBook[array_keys($newBook)[2]]);
             $allBooks = $this->getModel()->getAllBooks();
-            echo '<pre>';
             foreach ($allBooks as $value){
                 if (
                         $checkLine == strtolower($value[array_keys($value)[1]] . $value[array_keys($value)[2]]) && //сравнение новой строки с текущими из базы данных
