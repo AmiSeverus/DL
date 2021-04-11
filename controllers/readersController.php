@@ -118,7 +118,9 @@ class readersController extends controller {
                             'given_date' => '',
                             'return_date' => '',
                             'return_date_actual' => '',
-                            'form'=>''
+                            'form'=>'',
+                            'title'=>'',
+                            'author'=>''
                         ];
         } else {
             foreach ($records as $item) {
